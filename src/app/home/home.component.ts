@@ -18,17 +18,14 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.username = localStorage.getItem('user');
+
+    this.http.get('https://localhost:5001/api/User/All')
+    .subscribe((result) => {
+      console.log(result);
+    }, error => console.error(error.error));
   }
 
   getNotAvtiveUsers() {
     return this.http.get<RegisterModel[]>('https://localhost:5001/api/User/All');
-  }
-
-  approve(id) {
-    console.log(`https://localhost:5001/api/User/${id}`);
-    this.http.put(`https://localhost:5001/api/User/${id}`, id)
-      .subscribe((result) => console.log(result));
-
-    this.users = this.getNotAvtiveUsers();
   }
  }

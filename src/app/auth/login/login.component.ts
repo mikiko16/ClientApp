@@ -28,8 +28,8 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.http.post('https://localhost:5001/api/User/Login', this.model)
-      .subscribe((result: RegisterModel) => {
-        console.log(result);
+      .subscribe((result) => {
+        console.log(localStorage.getItem('authtoken'));
         this.router.navigateByUrl('');
       }, error => console.error(error.error));
   }
