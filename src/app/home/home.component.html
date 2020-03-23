@@ -3,6 +3,11 @@
     <app-teambuilding></app-teambuilding>
     <div>{{username}}</div>
   </div>
+    <div *ngIf="authService.admin">
+      <div *ngFor="let u of users">
+        <a>{{u.firstName}} {{u.lastName}}<button>Accept</button></a>
+      </div>
+    </div>
     <div *ngIf="!username">
       <h1>Hello, world!</h1>
       <p>Welcome to your new single-page application, built with:</p>

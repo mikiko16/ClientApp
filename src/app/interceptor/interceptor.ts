@@ -1,3 +1,4 @@
+import { AuthService } from './../auth/auth.service';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
@@ -19,7 +20,8 @@ const appSecret = "2824c8a8370146019a5b1e7a8aeab874"
 export class TokenInterceptor implements HttpInterceptor{
     
     constructor(private router: Router,
-    private toastr: ToastrService){}
+    private toastr: ToastrService,
+    public authService: AuthService){}
 
     intercept(request: HttpRequest<any>, next: HttpHandler):
     Observable<HttpEvent<any>>{
@@ -28,7 +30,7 @@ export class TokenInterceptor implements HttpInterceptor{
         request = request.clone({
             setHeaders: {
                 'Content-Type': 'application/json'
-       }
+        }
         })
     }
     else{
@@ -72,11 +74,16 @@ export class TokenInterceptor implements HttpInterceptor{
     }
 
     private successfulLogin(data) {
-        //this.authService.authtoken = data['_kmd']['authtoken'];
-        console.log(data);
+        this.authService.authtoken = data['auth_token'];
         localStorage.setItem('authtoken', data['auth_token']);
         localStorage.setItem('username', data['username']);
         localStorage.setItem('id', data['_id']);
+        if (data['IsAdmin'] === true){
+            this.authService.admin = true;
+        }
+        else{
+            this.authService.admin = false;
+        }
         this.router.navigate(['/home']);
         this.toastr.success("Logged in successful")
       }

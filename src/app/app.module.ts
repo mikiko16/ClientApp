@@ -15,6 +15,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { TeambuildingComponent } from './teambuilding/teambuilding/teambuilding.component'
+import { AuthService } from './auth/auth.service';
 
 export const BASE_URL = new InjectionToken<string>('BASE_URL');
 
@@ -36,7 +37,7 @@ export const BASE_URL = new InjectionToken<string>('BASE_URL');
     CommonModule,
     HttpClientModule
   ],
-  providers: [{ provide: BASE_URL , useValue: "https://localhost:5001/" },
+  providers: [AuthService, NavMenuComponent, { provide: BASE_URL , useValue: "https://localhost:5001/" },
   {
     provide: HTTP_INTERCEPTORS,      
     useClass: TokenInterceptor,      

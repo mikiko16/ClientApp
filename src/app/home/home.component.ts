@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RegisterModel } from '../models/register';
 import { Observable } from 'rxjs';
+import { AuthService} from '../auth/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -13,19 +14,21 @@ export class HomeComponent implements OnInit {
   users: Observable<RegisterModel[]>;
   @Input() model: Array<RegisterModel>; 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, public authService: AuthService) {
   }
 
   ngOnInit() {
-    this.username = localStorage.getItem('user');
-
-    this.http.get('https://localhost:5001/api/User/All')
-    .subscribe((result) => {
-      console.log(result);
-    }, error => console.error(error.error));
+    if(this.authService.admin){
+      console.log('I am Admin !');
+      this.getAllUsers();
+    }
   }
 
-  getNotAvtiveUsers() {
-    return this.http.get<RegisterModel[]>('https://localhost:5001/api/User/All');
+  getAllUsers() {
+    this.http.get<Observable<RegisterModel[]>>('https://localhost:5001/api/User/AllFromCompany')
+      .subscribe((result) => {
+      console.log(result);
+      this.users = result;
+      }, error => console.error(error.error));
   }
  }

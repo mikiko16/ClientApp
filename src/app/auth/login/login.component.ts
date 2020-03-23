@@ -1,3 +1,4 @@
+import { NavMenuComponent } from './../../nav-menu/nav-menu.component';
 import { Component, OnInit, Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginModel } from '../../models/login';
@@ -17,9 +18,8 @@ export class LoginComponent implements OnInit {
   baseUrl: string;
   router: Router;
 
-  constructor(private http: HttpClient, router: Router) {
+  constructor(private http: HttpClient, router: Router, public navComponent: NavMenuComponent) {
     this.model = new LoginModel("", "");
-    //this.baseUrl = baseUrls;
     this.router = router;
   }
 
@@ -29,8 +29,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.http.post('https://localhost:5001/api/User/Login', this.model)
       .subscribe((result) => {
-        console.log(localStorage.getItem('authtoken'));
-        this.router.navigateByUrl('');
+        this.router.navigateByUrl('/');
       }, error => console.error(error.error));
   }
 }
