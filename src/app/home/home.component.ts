@@ -19,7 +19,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     if(this.authService.admin){
-      console.log('I am Admin !');
       this.getAllUsers();
     }
   }
@@ -30,5 +29,12 @@ export class HomeComponent implements OnInit {
       console.log(result);
       this.users = result;
       }, error => console.error(error.error));
+  }
+
+  accept(id) {
+    this.http.put<Observable<RegisterModel[]>>('https://localhost:5001/team/update/' + id, id)
+      .subscribe((result) => {
+        this.users = result;  
+      },error => console.log(error.error));
   }
  }

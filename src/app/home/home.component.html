@@ -5,7 +5,7 @@
   </div>
     <div *ngIf="authService.admin">
       <div *ngFor="let u of users">
-        <a>{{u.firstName}} {{u.lastName}}<button>Accept</button></a>
+        <a *ngIf="!u.isActive"> {{u.firstName}} {{u.lastName}} <button (click)="accept(u.id)">Accept</button></a>
       </div>
     </div>
     <div *ngIf="!username">
