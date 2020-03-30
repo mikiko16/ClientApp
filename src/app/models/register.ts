@@ -7,5 +7,5 @@ export class RegisterModel {
       public companyname: string,
       public isActive: boolean,
       public isAdmin: boolean
-    ) { }
+    ) {}
   }

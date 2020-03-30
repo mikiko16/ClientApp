@@ -13,9 +13,6 @@ import {
 import { tap  } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 
-const appKey = "kid_S1mIOIlIX";
-const appSecret = "2824c8a8370146019a5b1e7a8aeab874"
-
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor{
     
@@ -26,7 +23,7 @@ export class TokenInterceptor implements HttpInterceptor{
     intercept(request: HttpRequest<any>, next: HttpHandler):
     Observable<HttpEvent<any>>{
 
-    if(request.url.endsWith('Login') || request.url.endsWith(appKey)){
+    if(request.url.endsWith('Login')){
         request = request.clone({
             setHeaders: {
                 'Content-Type': 'application/json'
@@ -55,17 +52,16 @@ export class TokenInterceptor implements HttpInterceptor{
                     this.toastr.error(err.error.errors[0].description,"Warning !")
                 break;
                 case 400:
-                console.log(err.error.errors[0].description);
-                this.toastr.error(err.error.errors[0].description,"Warning !")
+                    this.toastr.error(err.error.errors[0].description,"Warning !")
                 break;
                 case 404:
-                this.toastr.error(err.error.errors[0].description,"Warning !")
+                    this.toastr.error(err.error.errors[0].description,"Warning !")
                 break;
                 case 409:
-                this.toastr.error(err.error.errors[0].description,"Warning !")
+                    this.toastr.error(err.error.errors[0].description,"Warning !")
                 break;
                 case 500:
-                this.toastr.error(err.error.errors[0].description,"Warning !")
+                    this.toastr.error(err.error.errors[0].description,"Warning !")
                 break;
             }
             return throwError(err);
@@ -77,7 +73,7 @@ export class TokenInterceptor implements HttpInterceptor{
         this.authService.authtoken = data['auth_token'];
         localStorage.setItem('authtoken', data['auth_token']);
         localStorage.setItem('username', data['username']);
-        localStorage.setItem('id', data['_id']);
+        localStorage.setItem('id', data['id']);
         if (data['IsAdmin'] === true){
             this.authService.admin = true;
         }

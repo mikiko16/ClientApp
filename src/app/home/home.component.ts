@@ -10,15 +10,17 @@ import { AuthService} from '../auth/auth.service';
 })
 export class HomeComponent implements OnInit {
 
+  public isEmpty: boolean;
   public username: String;
-  users: Observable<RegisterModel[]>;
+  public users: Observable<RegisterModel[]>;
+  public obs: Array<RegisterModel[]>;
   @Input() model: Array<RegisterModel>; 
 
   constructor(private http: HttpClient, public authService: AuthService) {
   }
 
   ngOnInit() {
-    if(this.authService.admin){
+    if(this.authService.admin) {
       this.getAllUsers();
     }
   }
@@ -26,15 +28,21 @@ export class HomeComponent implements OnInit {
   getAllUsers() {
     this.http.get<Observable<RegisterModel[]>>('https://localhost:5001/api/User/AllFromCompany')
       .subscribe((result) => {
-      console.log(result);
-      this.users = result;
-      }, error => console.error(error.error));
+      this.users = result
+      });
   }
 
   accept(id) {
     this.http.put<Observable<RegisterModel[]>>('https://localhost:5001/team/update/' + id, id)
       .subscribe((result) => {
         this.users = result;  
-      },error => console.log(error.error));
+      });
+  }
+
+  delete(id) {
+    this.http.delete<Observable<RegisterModel[]>>('https://localhost:5001/team/delete/' + id)
+      .subscribe((result) => {
+        this.users = result;
+      });
   }
  }
