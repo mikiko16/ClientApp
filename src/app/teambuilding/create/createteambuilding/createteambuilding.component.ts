@@ -4,6 +4,7 @@ import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { RegisterModel } from 'src/app/models/register';
 import { Observable } from 'rxjs';
 import { BsDatepickerModule, BsDatepickerDirective } from 'ngx-bootstrap/datepicker';
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-createteambuilding',
@@ -17,7 +18,7 @@ export class CreateteambuildingComponent implements OnInit {
   public users: Observable<RegisterModel[]>;
 
   constructor(public http: HttpClient) { 
-    this.model = new TeamBuildingModel("", "", [], [], new Date());
+    this.model = new TeamBuildingModel("", "", [], [], new Date);
   }
 
   ngOnInit(): void {
@@ -29,14 +30,13 @@ export class CreateteambuildingComponent implements OnInit {
     this.datepicker.hide();
   }
 
-  change(event) {
-    console.log(event.target.value);
-  }
-
   create() {
     let creator = localStorage.getItem('id');
     this.model.CreatorId = creator;
+    this.model.Date = this.model.Date[1];
     console.log(this.model);
+    this.http.post<Observable<TeamBuildingModel>>('https://localhost:5001/team/create', this.model)
+    .subscribe((result) => console.log(result));
   }
 
   getAllUsers() {

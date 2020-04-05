@@ -18,6 +18,7 @@ import { HomeComponent } from './home/home.component';
 import { TeambuildingComponent } from './teambuilding/teambuilding/teambuilding.component'
 import { AuthService } from './auth/auth.service';
 import { CreateteambuildingComponent } from './teambuilding/create/createteambuilding/createteambuilding.component';
+import { TeambuildingdetailsComponent } from './teambuilding/teambuildingdetails/teambuildingdetails.component';
 
 export const BASE_URL = new InjectionToken<string>('BASE_URL');
 
@@ -29,7 +30,8 @@ export const BASE_URL = new InjectionToken<string>('BASE_URL');
     NavMenuComponent,
     HomeComponent,
     TeambuildingComponent,
-    CreateteambuildingComponent
+    CreateteambuildingComponent,
+    TeambuildingdetailsComponent
   ],
   imports: [
     BrowserModule,

@@ -31,7 +31,6 @@ export class TokenInterceptor implements HttpInterceptor{
         })
     }
     else{
-        console.log(localStorage.getItem('authtoken'));
         request = request.clone({
            setHeaders: {
             'Authorization': `Bearer ${localStorage.getItem('authtoken')}`,
@@ -55,6 +54,9 @@ export class TokenInterceptor implements HttpInterceptor{
                     this.toastr.error(err.error.errors[0].description,"Warning !")
                 break;
                 case 404:
+                    this.toastr.error(err.error.errors[0].description,"Warning !")
+                break;
+                case 405:
                     this.toastr.error(err.error.errors[0].description,"Warning !")
                 break;
                 case 409:
