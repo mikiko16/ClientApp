@@ -5,6 +5,8 @@ import { RegisterModel } from 'src/app/models/register';
 import { Observable } from 'rxjs';
 import { BsDatepickerModule, BsDatepickerDirective } from 'ngx-bootstrap/datepicker';
 import { NgModel } from '@angular/forms';
+import { Router } from '@angular/router';
+import { removeSummaryDuplicates } from '@angular/compiler';
 
 @Component({
   selector: 'app-createteambuilding',
@@ -16,9 +18,16 @@ export class CreateteambuildingComponent implements OnInit {
   @ViewChild(BsDatepickerDirective, { static: false }) datepicker: BsDatepickerDirective;
   model: TeamBuildingModel;
   public users: Observable<RegisterModel[]>;
+  
+  public mySentences:Array<string> = [
+    'Sentence 1',
+    'Sentence 2',
+    'Sentence 3',
+    'Sentence 4' ,
+];
 
-  constructor(public http: HttpClient) { 
-    this.model = new TeamBuildingModel("", "", [], [], new Date);
+  constructor(public http: HttpClient, private router: Router) { 
+    this.model = new TeamBuildingModel("", "", [], new Date);
   }
 
   ngOnInit(): void {
@@ -35,8 +44,9 @@ export class CreateteambuildingComponent implements OnInit {
     this.model.CreatorId = creator;
     this.model.Date = this.model.Date[1];
     console.log(this.model);
-    this.http.post<Observable<TeamBuildingModel>>('https://localhost:5001/team/create', this.model)
-    .subscribe((result) => console.log(result));
+    this.http.post<TeamBuildingModel>('https://localhost:5001/team/create', this.model)
+    .subscribe((result) => this.router.navigateByUrl('/teamdetails/' + result.id));
+
   }
 
   getAllUsers() {

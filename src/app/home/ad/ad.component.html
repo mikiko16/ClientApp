@@ -1,0 +1,32 @@
+<div class="container">
+<h1>Add advertise</h1>
+    <form #adForm="ngForm" (ngSubmit)="create()">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" 
+          class="form-control" 
+          id="label" 
+          [(ngModel)]="model.title"
+          name="title"
+          #title="ngModel">
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-12 col-md-4 form-group">
+            <textarea id="date"
+              type="text"
+              class="form-control"
+              bsDaterangepicker
+              [(ngModel)]="model.text"
+              name="text"
+              #text="ngModel">
+            </textarea>
+          </div>
+        </div>
+        <img [src]="imageUrl" style="width:250px;height:200px">
+        <input type="file" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
+        <button type="Submit" class="btn-large btn-submit">Upload</button>
+      </div>
+    <button type="submit" class="btn btn-success">Create</button>
+  </form>
+</div>

@@ -19,6 +19,7 @@ import { TeambuildingComponent } from './teambuilding/teambuilding/teambuilding.
 import { AuthService } from './auth/auth.service';
 import { CreateteambuildingComponent } from './teambuilding/create/createteambuilding/createteambuilding.component';
 import { TeambuildingdetailsComponent } from './teambuilding/teambuildingdetails/teambuildingdetails.component';
+import { AdComponent } from './home/ad/ad.component';
 
 export const BASE_URL = new InjectionToken<string>('BASE_URL');
 
@@ -31,7 +32,8 @@ export const BASE_URL = new InjectionToken<string>('BASE_URL');
     HomeComponent,
     TeambuildingComponent,
     CreateteambuildingComponent,
-    TeambuildingdetailsComponent
+    TeambuildingdetailsComponent,
+    AdComponent
   ],
   imports: [
     BrowserModule,

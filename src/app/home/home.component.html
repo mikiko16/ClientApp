@@ -2,29 +2,20 @@
 <div *ngIf="username">
     <app-teambuilding></app-teambuilding>
     <div>{{username}}</div>
-  </div>
-    <div *ngIf="authService.admin">
-      <div *ngIf="users; else loading">
-        <h1>You have user requests !</h1>
-          <div *ngFor="let u of users">
-            <div class="col-xs-6" *ngIf="!u.isActive"> {{u.firstName}} {{u.lastName}}
-              <div>
-                <button type="button" class="btn btn-primary btn-sm" (click)="accept(u.id)">Accept</button>
-                <button type="button" class="btn btn-secondary btn-sm" (click)="delete(u.id)">Delete</button>
-              </div>
-            </div>
+</div>
+<div *ngIf="authService.admin">
+  <div *ngIf="users">
+    <h1>You have user requests !</h1>
+      <div *ngFor="let u of users">
+        <div class="col-xs-6" *ngIf="!u.isActive"> {{u.firstName}} {{u.lastName}}
+          <div>
+            <button type="button" class="btn btn-primary btn-sm" (click)="accept(u.id)">Accept</button>
+            <button type="button" class="btn btn-secondary btn-sm" (click)="delete(u.id)">Delete</button>
           </div>
+        </div>
       </div>
-      <ng-template #loading>
-        <h1>You have no pending requests !</h1>
-      </ng-template>
-    </div>
-    <div *ngIf="!username"> 
-      <h1>Hello, world!</h1>
-        <p>Welcome to your new single-page application, built with:</p>
-      <ul>
-        <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-        <li><a href='https://angular.io/'>Angular</a> and <a href='http://www.typescriptlang.org/'>TypeScript</a> for client-side code</li>
-        <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
-      </ul>
-    </div>
+  </div>
+</div>
+<div *ngIf="!username"> 
+  <app-ad></app-ad>
+</div>

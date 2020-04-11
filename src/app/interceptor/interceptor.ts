@@ -30,6 +30,13 @@ export class TokenInterceptor implements HttpInterceptor{
             }
         })
     }
+    else if(request.url.endsWith('uploadImage')){
+        request = request.clone({
+            setHeaders: {
+                'Authorization': `Bearer ${localStorage.getItem('authtoken')}`
+            }
+        }) 
+    }
     else{
         request = request.clone({
            setHeaders: {
@@ -60,6 +67,9 @@ export class TokenInterceptor implements HttpInterceptor{
                     this.toastr.error(err.error.errors[0].description,"Warning !")
                 break;
                 case 409:
+                    this.toastr.error(err.error.errors[0].description,"Warning !")
+                break;
+                case 415:
                     this.toastr.error(err.error.errors[0].description,"Warning !")
                 break;
                 case 500:

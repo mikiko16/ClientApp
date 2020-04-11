@@ -1,1 +1,9 @@
-<p>teambuildingdetails works!</p>
+<div class="container">
+  <h1>Organize Teambuilding</h1>
+    <div *ngFor="let u of users">
+      <app-teambuilding
+      [user]="u"
+      [teambId]="id"
+      [id]="u.id"></app-teambuilding>
+  </div>
+</div>

@@ -14,7 +14,7 @@ const routes: Route[] = [
   {path: 'register', component: RegisterComponent},
   {path: 'teambuilding', component: TeambuildingComponent},
   {path: 'create', component: CreateteambuildingComponent},
-  {path: 'teamdetails', component: TeambuildingdetailsComponent}
+  {path: 'teamdetails/:id', component: TeambuildingdetailsComponent}
 ]
 
 @NgModule({
