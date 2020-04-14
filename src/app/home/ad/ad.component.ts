@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdModel } from 'src/app/models/ad';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ad',
@@ -12,9 +13,11 @@ export class AdComponent implements OnInit {
   imageUrl: string = "/assets/img/download.jfif";
   model: AdModel;
   fileToUpload: File = null;
+  formData: FormData = new FormData();
+  picId: string;
 
-  constructor(public http: HttpClient) {
-    this.model = new AdModel("", "");
+  constructor(public http: HttpClient, public router: Router) {
+    this.model = new AdModel("", "", "");
    }
 
   ngOnInit(): void {
@@ -29,21 +32,22 @@ export class AdComponent implements OnInit {
     reader.onload = (event: any) => {
       this.imageUrl = event.target.result;
     }
+    this.formData.append('Image', this.fileToUpload, this.fileToUpload.name);
 
-    const formData: FormData = new FormData();
-
-    formData.append('Image', this.fileToUpload, this.fileToUpload.name);
-    formData.append('ImageCaption', 'Miro')
-
-    this.http.post('https://localhost:5001/things/uploadImage', formData)
-      .subscribe((result) => console.log(result));
+    console.log(this.formData);
+    console.log(this.fileToUpload);
+    this.http.post('https://localhost:5001/images/uploadImage', this.formData, {responseType: 'text'})
+      .subscribe((result) => this.model.Link = result,
+      err => console.log(err));
   }
 
-  OnSubmit() {
-    console.log('Miro is the best ')
-  }
+  create() {      
+    console.log(this.formData);
 
-  create() {
-
+    this.http.post('https://localhost:5001/ads/createAd', this.model)
+      .subscribe((result) => console.log(result),
+      err => console.log(err));  
+      
+    this.router.navigateByUrl('/');
   }
 }

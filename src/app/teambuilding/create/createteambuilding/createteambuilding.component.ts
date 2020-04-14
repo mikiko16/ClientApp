@@ -18,13 +18,6 @@ export class CreateteambuildingComponent implements OnInit {
   @ViewChild(BsDatepickerDirective, { static: false }) datepicker: BsDatepickerDirective;
   model: TeamBuildingModel;
   public users: Observable<RegisterModel[]>;
-  
-  public mySentences:Array<string> = [
-    'Sentence 1',
-    'Sentence 2',
-    'Sentence 3',
-    'Sentence 4' ,
-];
 
   constructor(public http: HttpClient, private router: Router) { 
     this.model = new TeamBuildingModel("", "", [], new Date);

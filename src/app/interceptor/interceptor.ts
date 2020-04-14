@@ -23,7 +23,7 @@ export class TokenInterceptor implements HttpInterceptor{
     intercept(request: HttpRequest<any>, next: HttpHandler):
     Observable<HttpEvent<any>>{
 
-    if(request.url.endsWith('Login')){
+    if(request.url.endsWith('Login') || request.url.endsWith('facebook')){
         request = request.clone({
             setHeaders: {
                 'Content-Type': 'application/json'
@@ -33,10 +33,12 @@ export class TokenInterceptor implements HttpInterceptor{
     else if(request.url.endsWith('uploadImage')){
         request = request.clone({
             setHeaders: {
-                'Authorization': `Bearer ${localStorage.getItem('authtoken')}`
+              'Authorization': `Bearer ${localStorage.getItem('authtoken')}`,
+              //'Content-Type': 'image/jpeg'
             }
         }) 
-    }
+        console.log(request)
+    }   
     else{
         request = request.clone({
            setHeaders: {
@@ -47,7 +49,10 @@ export class TokenInterceptor implements HttpInterceptor{
     }
     return next.handle(request)
         .pipe(tap((event: HttpEvent<any>) => {
-            if (event instanceof HttpResponse && request.url.endsWith('Login')){
+            if (event instanceof HttpResponse && request.url.endsWith('Login') ){
+                this.successfulLogin(event.body)
+            }
+            else if (event instanceof HttpResponse && request.url.endsWith('facebook') ){
                 this.successfulLogin(event.body)
             }
         },

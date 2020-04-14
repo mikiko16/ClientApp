@@ -16,16 +16,14 @@
             <textarea id="date"
               type="text"
               class="form-control"
-              bsDaterangepicker
               [(ngModel)]="model.text"
               name="text"
               #text="ngModel">
             </textarea>
           </div>
         </div>
-        <img [src]="imageUrl" style="width:250px;height:200px">
-        <input type="file" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
-        <button type="Submit" class="btn-large btn-submit">Upload</button>
+          <img [src]="imageUrl" style="width:250px;height:200px">
+          <input type="file" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
       </div>
     <button type="submit" class="btn btn-success">Create</button>
   </form>

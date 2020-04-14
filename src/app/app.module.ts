@@ -20,6 +20,10 @@ import { AuthService } from './auth/auth.service';
 import { CreateteambuildingComponent } from './teambuilding/create/createteambuilding/createteambuilding.component';
 import { TeambuildingdetailsComponent } from './teambuilding/teambuildingdetails/teambuildingdetails.component';
 import { AdComponent } from './home/ad/ad.component';
+import { FacebookComponent } from './auth/facebook/facebook.component';
+import { SpinnerComponent } from './auth/spinner/spinner.component';
+import { ViewadsComponent } from './home/viewads/viewads.component';
+import { ViewadComponent } from './home/viewad/viewad.component';
 
 export const BASE_URL = new InjectionToken<string>('BASE_URL');
 
@@ -33,7 +37,11 @@ export const BASE_URL = new InjectionToken<string>('BASE_URL');
     TeambuildingComponent,
     CreateteambuildingComponent,
     TeambuildingdetailsComponent,
-    AdComponent
+    AdComponent,
+    FacebookComponent,
+    SpinnerComponent,
+    ViewadsComponent,
+    ViewadComponent
   ],
   imports: [
     BrowserModule,

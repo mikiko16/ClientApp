@@ -5,7 +5,7 @@
 </div>
 <div *ngIf="authService.admin">
   <div *ngIf="users">
-    <h1>You have user requests !</h1>
+    <h1>User requests !</h1>
       <div *ngFor="let u of users">
         <div class="col-xs-6" *ngIf="!u.isActive"> {{u.firstName}} {{u.lastName}}
           <div>
@@ -16,6 +16,6 @@
       </div>
   </div>
 </div>
-<div *ngIf="!username"> 
-  <app-ad></app-ad>
+<div *ngIf="!authService.admin && authService.checkIfLoggedIn()"> 
+  <app-viewads></app-viewads>
 </div>

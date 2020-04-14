@@ -6,7 +6,8 @@ import { Routes, Route,  RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { CreateteambuildingComponent } from './teambuilding/create/createteambuilding/createteambuilding.component';
 import { TeambuildingdetailsComponent } from './teambuilding/teambuildingdetails/teambuildingdetails.component';
-
+import { FacebookComponent } from './auth/facebook/facebook.component';
+import { AdComponent } from './home/ad/ad.component';
 
 const routes: Route[] = [
   {path: '', component: HomeComponent},
@@ -14,7 +15,9 @@ const routes: Route[] = [
   {path: 'register', component: RegisterComponent},
   {path: 'teambuilding', component: TeambuildingComponent},
   {path: 'create', component: CreateteambuildingComponent},
-  {path: 'teamdetails/:id', component: TeambuildingdetailsComponent}
+  {path: 'teamdetails/:id', component: TeambuildingdetailsComponent},
+  {path: 'facebook-login', component: FacebookComponent},
+  {path: 'createAd', component: AdComponent}
 ]
 
 @NgModule({
