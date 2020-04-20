@@ -1,0 +1,13 @@
+<div class="container">
+    <h1>Your active teambuildings !</h1>
+      <div *ngFor="let t of teambuilds">
+        <div class="container">
+          <form>
+              <div class="form-group w-25">
+                <h3>You will be on a teambuilding in {{t.location}} on {{t.date}}</h3>
+              </div>
+                <button type="button" *ngIf="!authService.admin && authService.checkIfLoggedIn()" [routerLink]="['/viewactiveteambuilding/', t.id]" class="btn btn-secondary btn-sm">View</button>
+          </form>
+        </div>
+    </div>
+</div>   

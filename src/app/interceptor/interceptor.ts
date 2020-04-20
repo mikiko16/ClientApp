@@ -58,6 +58,7 @@ export class TokenInterceptor implements HttpInterceptor{
         },
         (err: any) => {
         if(err instanceof HttpErrorResponse){
+            console.log(err);
             switch(err.status){
                 case 401:
                     this.toastr.error(err.error.errors[0].description,"Warning !")

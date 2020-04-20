@@ -7,6 +7,7 @@ import { BsDatepickerModule, BsDatepickerDirective } from 'ngx-bootstrap/datepic
 import { NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
 import { removeSummaryDuplicates } from '@angular/compiler';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-createteambuilding',
@@ -20,7 +21,7 @@ export class CreateteambuildingComponent implements OnInit {
   public users: Observable<RegisterModel[]>;
 
   constructor(public http: HttpClient, private router: Router) { 
-    this.model = new TeamBuildingModel("", "", [], new Date);
+    this.model = new TeamBuildingModel("", "", [], "");
   }
 
   ngOnInit(): void {
@@ -35,7 +36,13 @@ export class CreateteambuildingComponent implements OnInit {
   create() {
     let creator = localStorage.getItem('id');
     this.model.CreatorId = creator;
-    this.model.Date = this.model.Date[1];
+    
+    const format = 'yyyy-MM-ddThh:mm:ss';
+    const myDate = this.model.Date[1];
+    const locale = 'en-US';
+    const formattedDate = formatDate(myDate, format, locale);
+    
+    this.model.Date = formattedDate;
     console.log(this.model);
     this.http.post<TeamBuildingModel>('https://localhost:5001/team/create', this.model)
     .subscribe((result) => this.router.navigateByUrl('/teamdetails/' + result.id));

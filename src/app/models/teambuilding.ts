@@ -3,7 +3,9 @@ export class TeamBuildingModel {
       public Location: string,
       public CreatorId: string,
       public Participants: string[],
-      public Date: Date,
+      public Date: string,
       public id?: string,
+      public CompanyName?: string,
+      public Link?: string
   ) {}
 }

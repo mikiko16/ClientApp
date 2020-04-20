@@ -16,6 +16,6 @@
       </div>
   </div>
 </div>
-<div *ngIf="!authService.admin && authService.checkIfLoggedIn()"> 
+<div *ngIf="authService.checkIfLoggedIn()"> 
   <app-viewads></app-viewads>
 </div>

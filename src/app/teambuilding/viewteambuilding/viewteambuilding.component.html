@@ -1,0 +1,6 @@
+<h1>Teambuilding Pics</h1>
+  <div *ngFor="let a of pics">
+    <img [src]="a.link"  height="400" width="400"/>
+  </div>
+  <img [src]="imageUrl" style="width:250px;height:200px">
+  <input type="file" #Image accept="image/*" (change)="handleFileInput($event.target.files)">

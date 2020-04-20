@@ -23,7 +23,12 @@ import { AdComponent } from './home/ad/ad.component';
 import { FacebookComponent } from './auth/facebook/facebook.component';
 import { SpinnerComponent } from './auth/spinner/spinner.component';
 import { ViewadsComponent } from './home/viewads/viewads.component';
-import { ViewadComponent } from './home/viewad/viewad.component';
+import { HomeService } from './home/home.service';
+import { ActiveteambuildingComponent } from './teambuilding/activeteambuilding/activeteambuilding.component';
+import { PastteambuildingComponent } from './teambuilding/pastteambuilding/pastteambuilding.component';
+import { ViewteambuildingComponent } from './teambuilding/viewteambuilding/viewteambuilding.component';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { ViewactiveteambuildingComponent } from './teambuilding/viewactiveteambuilding/viewactiveteambuilding.component'
 
 export const BASE_URL = new InjectionToken<string>('BASE_URL');
 
@@ -41,7 +46,10 @@ export const BASE_URL = new InjectionToken<string>('BASE_URL');
     FacebookComponent,
     SpinnerComponent,
     ViewadsComponent,
-    ViewadComponent
+    ActiveteambuildingComponent,
+    PastteambuildingComponent,
+    ViewteambuildingComponent,
+    ViewactiveteambuildingComponent
   ],
   imports: [
     BrowserModule,
@@ -51,9 +59,10 @@ export const BASE_URL = new InjectionToken<string>('BASE_URL');
     BsDatepickerModule.forRoot(),
     FormsModule,
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    GoogleMapsModule
   ],
-  providers: [AuthService, NavMenuComponent, { provide: BASE_URL , useValue: "https://localhost:5001/" },
+  providers: [AuthService, HomeService, NavMenuComponent, { provide: BASE_URL , useValue: "https://localhost:5001/" },
   {
     provide: HTTP_INTERCEPTORS,      
     useClass: TokenInterceptor,      

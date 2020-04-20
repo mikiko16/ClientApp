@@ -28,7 +28,6 @@ export class HomeComponent implements OnInit {
   getAllUsers() {
     this.http.get<Observable<RegisterModel[]>>('https://localhost:5001/api/User/AllFromCompany')
       .subscribe((result) => {
-        console.log(result);
       this.users = result
       });
   }
