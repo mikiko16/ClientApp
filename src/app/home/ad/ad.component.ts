@@ -34,7 +34,7 @@ export class AdComponent implements OnInit {
     }
     this.formData.append('Image', this.fileToUpload, this.fileToUpload.name);
 
-    this.http.post('https://localhost:5001/images/uploadImage', this.formData, {responseType: 'text'})
+    this.http.post('https://localhost:5001/images/uploadAdImage', this.formData, {responseType: 'text'})
       .subscribe((result) => this.model.Link = result,
       err => console.log(err));
   }
@@ -45,5 +45,7 @@ export class AdComponent implements OnInit {
     this.http.post('https://localhost:5001/ads/createAd', this.model)
       .subscribe((result) => this.router.navigateByUrl('/'),
       err => console.log(err));  
+
+    this.fileToUpload = null;
   }
 }

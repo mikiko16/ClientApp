@@ -26,7 +26,7 @@ export class TeambuildingComponent implements OnInit {
   create() {
     this.model.UserAppId = this.id;
     this.model.TeamBuildingId = this.teambId;
-
+    console.log(this.model);
     this.http.post<Observable<Thing[]>>("https://localhost:5001/things/createThing", this.model) 
     .subscribe((result) => this.things = result); 
   }

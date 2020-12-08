@@ -30,7 +30,7 @@ export class TokenInterceptor implements HttpInterceptor{
             }
         })
     }
-    else if(request.url.endsWith('uploadImage')){
+    else if(request.url.endsWith('uploadAdImage') || request.url.endsWith('uploadTeamImage')){
         request = request.clone({
             setHeaders: {
               'Authorization': `Bearer ${localStorage.getItem('authtoken')}`,
@@ -61,7 +61,7 @@ export class TokenInterceptor implements HttpInterceptor{
             console.log(err);
             switch(err.status){
                 case 401:
-                    this.toastr.error(err.error.errors[0].description,"Warning !")
+                    this.toastr.error(err.error,"Warning !")
                 break;
                 case 400:
                     this.toastr.error(err.error.errors[0].description,"Warning !")
@@ -88,6 +88,7 @@ export class TokenInterceptor implements HttpInterceptor{
     }
 
     private successfulLogin(data) {
+        console.log(data);
         this.authService.authtoken = data['auth_token'];
         localStorage.setItem('authtoken', data['auth_token']);
         localStorage.setItem('username', data['username']);

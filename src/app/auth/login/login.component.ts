@@ -3,7 +3,6 @@ import { Component, OnInit, Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginModel } from '../../models/login';
 import { HttpClient } from '@angular/common/http';
-import { RegisterModel } from '../../models/register';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +28,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.http.post('https://localhost:5001/api/User/Login', this.model)
       .subscribe((result) => {
-        this.router.navigateByUrl('/');
-      }, error => console.error(error.error));
+        this.router.navigateByUrl('');
+    }, error => console.error(error.error));
   }
 }

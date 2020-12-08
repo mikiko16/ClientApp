@@ -4,6 +4,7 @@ import { HomeService } from '../home.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Observable } from 'rxjs/internal/Observable';
 import { AdModel } from 'src/app/models/ad';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-viewads',
@@ -12,12 +13,17 @@ import { AdModel } from 'src/app/models/ad';
 })
 export class ViewadsComponent implements OnInit {
 
-  public ads: Observable<AdModel[]>;
+  ads: any;
 
-  constructor(public http: HttpClient, public homeSerice: HomeService, public authService: AuthService) { }
+  constructor(public http: HttpClient, 
+              public homeSerice: HomeService, 
+              public authService: AuthService,
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.ads = this.homeSerice.getAllAds();
+    this.activatedRoute.data.subscribe((data: {ads: any}) => {
+      this.ads = data.ads
+    })
   }
 
   delete(id) {

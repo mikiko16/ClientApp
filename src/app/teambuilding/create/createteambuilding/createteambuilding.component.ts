@@ -45,8 +45,8 @@ export class CreateteambuildingComponent implements OnInit {
     this.model.Date = formattedDate;
     console.log(this.model);
     this.http.post<TeamBuildingModel>('https://localhost:5001/team/create', this.model)
-    .subscribe((result) => this.router.navigateByUrl('/teamdetails/' + result.id));
-
+    .subscribe((result) => this.router.navigateByUrl('/teamdetails/' + result.id),
+    err => console.log(err))
   }
 
   getAllUsers() {

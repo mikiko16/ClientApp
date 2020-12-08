@@ -5,6 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { TeamBuildingModel } from 'src/app/models/teambuilding';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Picture } from 'src/app/models/picture';
 
 @Component({
   selector: 'app-viewteambuilding',
@@ -14,13 +15,10 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 export class ViewteambuildingComponent implements OnInit {
 
   id: string;
-  pics: Observable<string>;
-  teambuilds: TeamBuildingModel[];
+  pics: Observable<Picture[]>;
   imageUrl: string = "/assets/img/download.jfif";
-  model: TeamBuildingModel;
   fileToUpload: File = null;
   formData: FormData = new FormData();
-  picId: string;
   private routeSub: Subscription;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router, public authService: AuthService) {}
@@ -28,7 +26,14 @@ export class ViewteambuildingComponent implements OnInit {
    ngOnInit(): void {
     this.routeSub = this.route.params.subscribe((params: Params): void => {
       this.id = params['id'];
-    })};
+    })
+
+    this.http.get<Observable<Picture[]>>('https://localhost:5001/team/getPicsById/' + this.id)
+      .subscribe((result) => this.pics = result,
+      err => {
+        return console.log(err);
+      });
+  };
 
   handleFileInput(file: FileList) {
     this.fileToUpload = file.item(0);
@@ -42,16 +47,12 @@ export class ViewteambuildingComponent implements OnInit {
     this.formData.append('Image', this.fileToUpload, this.fileToUpload.name);
     this.formData.append('Id', this.id);
 
-    this.http.post('https://localhost:5001/images/uploadImage', this.formData, {responseType: 'text'})
-      .subscribe((result) => console.log(result),
-      err => console.log(err));
-  }
+    this.http.post<Observable<Picture[]>>('https://localhost:5001/images/uploadTeamImage', this.formData)
+      .subscribe((result) => this.pics = result,
+      err => {
+        return console.log(err);
+      });
 
-  create() {      
-    this.http.post('https://localhost:5001/ads/createAd', this.model);
-  }
-
-  Upload() {
-    console.log('I am here !')
+    this.fileToUpload = null;
   }
 }

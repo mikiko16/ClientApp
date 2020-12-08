@@ -2,7 +2,7 @@ import { TeambuildingComponent } from './teambuilding/teambuilding/teambuilding.
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { NgModule } from '@angular/core';
-import { Routes, Route,  RouterModule } from '@angular/router';
+import { Route,  RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { CreateteambuildingComponent } from './teambuilding/create/createteambuilding/createteambuilding.component';
 import { TeambuildingdetailsComponent } from './teambuilding/teambuildingdetails/teambuildingdetails.component';
@@ -12,9 +12,10 @@ import { ActiveteambuildingComponent } from './teambuilding/activeteambuilding/a
 import { PastteambuildingComponent } from './teambuilding/pastteambuilding/pastteambuilding.component';
 import { ViewteambuildingComponent } from './teambuilding/viewteambuilding/viewteambuilding.component';
 import { ViewactiveteambuildingComponent } from './teambuilding/viewactiveteambuilding/viewactiveteambuilding.component';
+import { ResolveService } from './home/adsResolver';
 
 const routes: Route[] = [
-  {path: '', component: HomeComponent},
+  {path: '', component: HomeComponent, resolve: {ads: ResolveService}},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'teambuilding', component: TeambuildingComponent},

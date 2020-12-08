@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { HubConnection,HubConnectionBuilder } from '@aspnet/signalr';
 import { Thing } from 'src/app/models/things';
 import { Subscription } from 'rxjs';
-import * as signalR from '@aspnet/signalr';
 
 @Component({
   selector: 'app-viewactiveteambuilding',
@@ -31,13 +30,11 @@ export class ViewactiveteambuildingComponent implements OnInit {
       this.id = params['id'];
     });
 
-    this.userId = localStorage.getItem("id");
-    
     this.http.get<Thing[]>('https://localhost:5001/things/getThings/' + this.id)
       .subscribe((result) => this.things = result),
       err => console.log(err);
 
-    this.nick = window.prompt('Your name:', 'Emily');
+    this.nick = window.prompt('Your name:', this.nick);
   
     this._hubConnection = new HubConnectionBuilder().withUrl("https://localhost:5001/chat").build();
   
