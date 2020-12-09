@@ -28,7 +28,10 @@ import { ActiveteambuildingComponent } from './teambuilding/activeteambuilding/a
 import { PastteambuildingComponent } from './teambuilding/pastteambuilding/pastteambuilding.component';
 import { ViewteambuildingComponent } from './teambuilding/viewteambuilding/viewteambuilding.component';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { ViewactiveteambuildingComponent } from './teambuilding/viewactiveteambuilding/viewactiveteambuilding.component'
+import { ViewactiveteambuildingComponent } from './teambuilding/viewactiveteambuilding/viewactiveteambuilding.component';
+import { NotificationsComponent } from './notifications/notifications.component'
+import { NotificationService } from './core/generated';
+import { BroadcastComponent } from './broadcast/broadcast.component';
 
 export const BASE_URL = new InjectionToken<string>('BASE_URL');
 
@@ -49,7 +52,9 @@ export const BASE_URL = new InjectionToken<string>('BASE_URL');
     ActiveteambuildingComponent,
     PastteambuildingComponent,
     ViewteambuildingComponent,
-    ViewactiveteambuildingComponent
+    ViewactiveteambuildingComponent,
+    NotificationsComponent,
+    BroadcastComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +67,7 @@ export const BASE_URL = new InjectionToken<string>('BASE_URL');
     HttpClientModule,
     GoogleMapsModule
   ],
-  providers: [AuthService, HomeService, NavMenuComponent, { provide: BASE_URL , useValue: "https://localhost:5001/" },
+  providers: [NotificationService, AuthService, HomeService, NavMenuComponent, { provide: BASE_URL , useValue: "https://localhost:5001/" },
   {
     provide: HTTP_INTERCEPTORS,      
     useClass: TokenInterceptor,      

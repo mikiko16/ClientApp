@@ -13,9 +13,13 @@ import { PastteambuildingComponent } from './teambuilding/pastteambuilding/pastt
 import { ViewteambuildingComponent } from './teambuilding/viewteambuilding/viewteambuilding.component';
 import { ViewactiveteambuildingComponent } from './teambuilding/viewactiveteambuilding/viewactiveteambuilding.component';
 import { ResolveService } from './home/adsResolver';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { BroadcastComponent } from './broadcast/broadcast.component';
 
 const routes: Route[] = [
   {path: '', component: HomeComponent, resolve: {ads: ResolveService}},
+  { path: 'notifications', component: NotificationsComponent},
+  { path: 'broadcast', component: BroadcastComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'teambuilding', component: TeambuildingComponent},

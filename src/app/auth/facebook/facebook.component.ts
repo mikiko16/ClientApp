@@ -48,7 +48,7 @@ export class FacebookComponent {
 
       this.userService.facebookLogin(result.accessToken)
 
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('');
       //  .finally(() => this.isRequesting = false)
      //   .subscribe(
      //   result => {

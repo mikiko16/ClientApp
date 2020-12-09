@@ -3,6 +3,7 @@ import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/cor
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { LoginModel } from '../models/Login';
+import { NotificationMiddlewareService } from '../core/notification-middleware.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -16,7 +17,10 @@ export class NavMenuComponent implements OnInit{
   routing: Router; 
   //public currentAuthToken : string;
 
-  constructor(router: Router, private http: HttpClient, public authService: AuthService)
+  constructor(router: Router,
+             private http: HttpClient, 
+             public authService: AuthService,
+             public notificationMiddleware: NotificationMiddlewareService)
   {
     this.routing = router;
   }

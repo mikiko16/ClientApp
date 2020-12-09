@@ -23,7 +23,6 @@ export class RegisterComponent implements OnInit {
 
   constructor(private http: HttpClient, router: Router) {
     this.model = new RegisterModel("", "", "", "", "", false, false);
-    //this.baseUrl = baseUrls;
     this.router = router;
   }
 

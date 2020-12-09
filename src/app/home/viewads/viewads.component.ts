@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { HomeService } from '../home.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Observable } from 'rxjs/internal/Observable';
 import { AdModel } from 'src/app/models/ad';
@@ -13,10 +12,9 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ViewadsComponent implements OnInit {
 
-  ads: any;
+  ads: Observable<AdModel[]>;
 
   constructor(public http: HttpClient, 
-              public homeSerice: HomeService, 
               public authService: AuthService,
               private activatedRoute: ActivatedRoute) { }
 
