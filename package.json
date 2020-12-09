@@ -25,7 +25,7 @@
     "@types/googlemaps": "^3.39.3",
     "bootstrap": "^4.4.1",
     "cloudinary-core": "^2.8.2",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "ngx-bootstrap": "^5.5.0",
     "ngx-toastr": "^12.0.0",
     "rxjs": "~6.5.4",
