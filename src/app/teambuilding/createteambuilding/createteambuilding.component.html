@@ -1,0 +1,28 @@
+<div class="container">
+    <h1>Enter location and date for the teambuilding !</h1>
+    <form #loginForm="ngForm" (ngSubmit)="create()">
+      <div class="form-group">
+        <label for="location">Location</label>
+        <input type="text" 
+          class="form-control" 
+          id="location" 
+          [(ngModel)]="model.Location"
+          name="location"
+          #location="ngModel">
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-12 col-md-4 form-group">
+            <input id="date"
+              type="text"
+              class="form-control"
+              bsDaterangepicker
+              [(ngModel)]="model.Date"
+              name="date"
+              #date="ngModel">
+          </div>
+        </div>
+      </div>
+    <button type="submit" class="btn btn-success">Create</button>
+  </form>
+</div>

@@ -51,7 +51,15 @@ export class NotificationService {
             response instanceof HttpResponse ? response.body : 
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        let _headers: any = {}; 
+        
+        if (response.headers)
+        { 
+            for (let key of response.headers.keys()) { 
+                _headers[key] = response.headers.get(key); 
+            }
+        };
+
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return _observableOf<void>(<any>null);
@@ -61,6 +69,7 @@ export class NotificationService {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
+
         return _observableOf<void>(<any>null);
     }
 
@@ -99,7 +108,14 @@ export class NotificationService {
             response instanceof HttpResponse ? response.body : 
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        let _headers: any = {}; 
+
+        if (response.headers) { 
+            for (let key of response.headers.keys()) { 
+                _headers[key] = response.headers.get(key); 
+            }
+        };
+
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return _observableOf<void>(<any>null);
@@ -109,6 +125,7 @@ export class NotificationService {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
+        
         return _observableOf<void>(<any>null);
     }
 
@@ -147,7 +164,15 @@ export class NotificationService {
             response instanceof HttpResponse ? response.body : 
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        let _headers: any = {}; 
+
+        if (response.headers) 
+        { 
+            for (let key of response.headers.keys()) { 
+                _headers[key] = response.headers.get(key); 
+            }
+        };
+
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return _observableOf<void>(<any>null);
@@ -157,6 +182,7 @@ export class NotificationService {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
+        
         return _observableOf<void>(<any>null);
     }
 }

@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
@@ -69,8 +68,8 @@ export const BASE_URL = new InjectionToken<string>('BASE_URL');
   ],
   providers: [NotificationService, AuthService, HomeService, NavMenuComponent, { provide: BASE_URL , useValue: "https://localhost:5001/" },
   {
-    provide: HTTP_INTERCEPTORS,      
-    useClass: TokenInterceptor,      
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
     multi: true   
     }],
   bootstrap: [AppComponent]
